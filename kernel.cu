@@ -67,7 +67,7 @@ void gpu_stride_loop(int* device_vec, int size)
 
     // Warm up GPU (The first kernel of a program has more overhead than the followings)
     gpuErrCheck(cudaEventRecord(startEvent, 0));
-    strided_kernel <<<size / blockSize, blockSize >>> (device_vec, size, 1);
+    strided_kernel << <size / blockSize, blockSize >> > (device_vec, size, 1);
     gpuErrCheck(cudaEventRecord(stopEvent, 0));
     gpuErrCheck(cudaEventSynchronize(stopEvent));
 
